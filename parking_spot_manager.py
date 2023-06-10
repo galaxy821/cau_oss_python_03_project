@@ -1,5 +1,5 @@
 """
-version #2
+version #3
 parking_spot_manager.py
 주차장 정보를 관리하는 모듈
 
@@ -10,6 +10,9 @@ get(keyword) 메소드로 해당 keyword 키에 해당하는 item을 반환합�
 str_list_to_class_list(str_list) 함수는 주차장 정보 문자열 리스트를 parking_spot 객체 리스트로 변환합니다.
 
 print_spots(spots) 함수는 주차장 정보를 출력합니다.
+
+filter_by_name, filter_by_city, filter_by_district, filter_by_ptype 함수는 주차장 정보를 각 keyword 기준으로 필터링합니다.
+filter_by_location 함수는 주차장 정보를 경도/위도 범위로 필터링합니다.
 """
 
 class parking_spot:
@@ -96,7 +99,79 @@ def print_spots(spots):
     print(f"---print elements({len(spots)})---")
     for spot in spots:
         print(spot)
+
+
+# version #3 추가 내용
+def filter_by_name(spots, name) :
+    """filter_by_name
+    이름으로 parking_spot 객체 리스트를 필터링합니다.
+
+    Args:
+        spots (list): parking_spot 객체 리스트
+        name (string): 이름
         
+    Returns:
+        list: 필터링된 parking_spot 객체 리스트
+    """
+    return [spot for spot in spots if name in spot.get('name')]
+
+
+def filter_by_city(spots, city) :
+    """filter_by_city
+    시도로 parking_spot 객체 리스트를 필터링합니다.
+
+    Args:
+        spots (list): parking_spot 객체 리스트
+        city (string): 시도
+        
+    Returns:
+        list: 필터링된 parking_spot 객체 리스트
+    """
+    return [spot for spot in spots if city in spot.get('city')]
+
+
+def filter_by_district(spots, district) :
+    """filter_by_district
+    시군구로 parking_spot 객체 리스트를 필터링합니다.
+
+    Args:
+        spots (list): parking_spot 객체 리스트
+        district (string): 시군구
+
+    Returns:
+        list: 필터링된 parking_spot 객체 리스트
+    """
+    return [spot for spot in spots if district in spot.get('district')]
+
+
+def filter_by_ptype(spots, ptype) :
+    """filter_by_ptype
+    주차장유형으로 parking_spot 객체 리스트를 필터링합니다.
+
+    Args:
+        spots (list): parking_spot 객체 리스트
+        ptype (string): 주차장유형
+
+    Returns:
+        list: 필터링된 parking_spot 객체 리스트
+    """
+    return [spot for spot in spots if ptype in spot.get('ptype')]
+
+
+def filter_by_location(spots, locations) :
+    """filter_by_location
+    위도, 경도 범위로 parking_spot 객체 리스트를 필터링합니다.
+
+    Args:
+        spots (list): parking_spot 객체 리스트
+        locations (tuple): 위도, 경도 범위 (각 최소, 최대 값)
+        
+    Returns:
+        list: 필터링된 parking_spot 객체 리스트
+    """
+    min_lat, max_lat, min_lon, max_lon = locations
+    return [spot for spot in spots if min_lat < spot.get('latitude') < max_lat and min_lon < spot.get('longitude') < max_lon]
+
 
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)
 if __name__ == '__main__':

@@ -1,13 +1,13 @@
-# version #2
+# version #3
 # file manager module에서 read_file 함수를 불러오기
 from file_manager import read_file
 
-# parking_spot_manager 모듈에서 str_list_to_class_list, print_spots 함수 불러오기
-from parking_spot_manager import str_list_to_class_list, print_spots
+# parking_spot_manager 모듈 불러오기
+import parking_spot_manager
 
 def start_process(path):
     str_list = read_file(path) # path에 해당하는 파일을 읽어 리스트로 변환
-    spots = str_list_to_class_list(str_list) # str_list를 parking_spot 객체 리스트로 변환
+    spots = parking_spot_manager.str_list_to_class_list(str_list) # str_list를 parking_spot 객체 리스트로 변환
     
     while True:
         print("---menu---")
@@ -17,7 +17,7 @@ def start_process(path):
         print("[4] exit")
         select = int(input('type:'))
         if select == 1:
-            print_spots(spots) # parking_spot 객체 리스트를 출력
+            parking_spot_manager.print_spots(spots) # parking_spot 객체 리스트를 출력
         elif select == 2:
             print("---filter by---")
             print("[1] name")
@@ -28,27 +28,22 @@ def start_process(path):
             select = int(input('type:'))
             if select == 1:
                 keyword = input('type name:')
-                print("not implemented yet")
-                # fill this block
+                spots = parking_spot_manager.filter_by_name(spots, keyword) # parking_spot 객체 리스트를 name으로 필터링
             elif select == 2:
                 keyword = input('type city:')
-                print("not implemented yet")
-                # fill this block
+                spots = parking_spot_manager.filter_by_city(spots, keyword) # parking_spot 객체 리스트를 city로 필터링
             elif select == 3:
                 keyword = input('type district:')
-                print("not implemented yet")
-                # fill this block
+                spots = parking_spot_manager.filter_by_district(spots, keyword) # parking_spot 객체 리스트를 district로 필터링
             elif select == 4:
                 keyword = input('type ptype:')
-                print("not implemented yet")
-                # fill this block
+                spots = parking_spot_manager.filter_by_ptype(spots, keyword) # parking_spot 객체 리스트를 ptype으로 필터링
             elif select == 5:
                 min_lat = float(input('type min lat:'))
                 max_lat = float(input('type max lat:'))
                 min_lon = float(input('type min long:'))
                 max_lon = float(input('type max long:'))
-                print("not implemented yet")
-                # fill this block
+                spots = parking_spot_manager.filter_by_location(spots, (min_lat, max_lat, min_lon, max_lon)) # parking_spot 객체 리스트를 location으로 필터링
             else:
                 print("invalid input")
         elif select == 3:
