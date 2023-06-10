@@ -1,4 +1,14 @@
+# version #2
+# file manager module에서 read_file 함수를 불러오기
+from file_manager import read_file
+
+# parking_spot_manager 모듈에서 str_list_to_class_list, print_spots 함수 불러오기
+from parking_spot_manager import str_list_to_class_list, print_spots
+
 def start_process(path):
+    str_list = read_file(path) # path에 해당하는 파일을 읽어 리스트로 변환
+    spots = str_list_to_class_list(str_list) # str_list를 parking_spot 객체 리스트로 변환
+    
     while True:
         print("---menu---")
         print("[1] print")
@@ -7,8 +17,7 @@ def start_process(path):
         print("[4] exit")
         select = int(input('type:'))
         if select == 1:
-            print("not implemented yet")
-            # fill this block
+            print_spots(spots) # parking_spot 객체 리스트를 출력
         elif select == 2:
             print("---filter by---")
             print("[1] name")
@@ -52,7 +61,7 @@ def start_process(path):
                 # fill this block
             else: print("invalid input")
         elif select == 4:
-            print("not implemented yet")
-            # fill this block
+            print("exit") # exit 문구 출력
+            break # 반복문 종료
         else:
             print("invalid input")
