@@ -1,7 +1,7 @@
 """
-version #3
+### version #4
 parking_spot_manager.py
-주차장 정보를 관리하는 모듈
+## 주차장 정보를 관리하는 모듈
 
 parking_spot class는 주차장 정보 item(name, city, district, ptype, longitude, latitude)를 갖고 있으며,
 생성자로 item 필드를 생성/설정 합니다.
@@ -13,6 +13,8 @@ print_spots(spots) 함수는 주차장 정보를 출력합니다.
 
 filter_by_name, filter_by_city, filter_by_district, filter_by_ptype 함수는 주차장 정보를 각 keyword 기준으로 필터링합니다.
 filter_by_location 함수는 주차장 정보를 경도/위도 범위로 필터링합니다.
+
+sort_by_keyword 함수는 parking_spot 객체 리스트를 주어진 항목 키워드으로 정렬합니다.
 """
 
 class parking_spot:
@@ -171,6 +173,20 @@ def filter_by_location(spots, locations) :
     """
     min_lat, max_lat, min_lon, max_lon = locations
     return [spot for spot in spots if min_lat < spot.get('latitude') < max_lat and min_lon < spot.get('longitude') < max_lon]
+
+
+def sort_by_keyword(spots, keyword) :
+    """sort_by_keyword
+    parking_spot 객체 리스트를 주어진 항목 키워드으로 정렬합니다.
+
+    Args:
+        spots (list): parking_spot 객체 리스트
+        keyword (string): 정렬할 항목 키워드
+        
+    Returns:
+        list: 정렬된 parking_spot 객체 리스트
+    """
+    return sorted(spots, key=lambda spot: spot.get(keyword))
 
 
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)

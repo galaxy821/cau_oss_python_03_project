@@ -1,4 +1,4 @@
-# version #3
+# version #4
 # file manager module에서 read_file 함수를 불러오기
 from file_manager import read_file
 
@@ -52,8 +52,7 @@ def start_process(path):
             print(keywords)
             keyword = input('type keyword:')
             if keyword in keywords:
-                print("not implemented yet")
-                # fill this block
+                spots = parking_spot_manager.sort_by_keyword(spots, keyword) # parking_spot 객체 리스트를 keyword의 항목으로 정렬
             else: print("invalid input")
         elif select == 4:
             print("exit") # exit 문구 출력
